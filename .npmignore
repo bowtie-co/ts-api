@@ -19,7 +19,8 @@ node_modules
 !lib/dist
 !lib/**/*.js
 !lib/**/*.d.ts
+!dist
+!dist/**/*.js
+!dist/**/*.d.ts
 !package.json
 !package-lock.json
-
-
