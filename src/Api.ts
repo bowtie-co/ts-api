@@ -44,31 +44,31 @@ export class Api implements IApiClient {
     }
   }
 
-  public async get<T>(request: IApiRequest): Promise<IApiFetchResponse<T>> {
-    return this.fetchThrow<T>(Object.assign(request, { method: ApiMethod.GET }));
+  public async get<T>(request: IApiRequest): Promise<T> {
+    return this.fetchJson<T>(Object.assign(request, { method: ApiMethod.GET }));
   }
 
-  public async put<T>(request: IApiRequest): Promise<IApiFetchResponse<T>> {
-    return this.fetch<T>(Object.assign(request, { method: ApiMethod.PUT }));
+  public async put<T>(request: IApiRequest): Promise<T> {
+    return this.fetchJson<T>(Object.assign(request, { method: ApiMethod.PUT }));
   }
 
-  public async patch<T>(request: IApiRequest): Promise<IApiFetchResponse<T>> {
-    return this.fetch<T>(Object.assign(request, { method: ApiMethod.PATCH }));
+  public async patch<T>(request: IApiRequest): Promise<T> {
+    return this.fetchJson<T>(Object.assign(request, { method: ApiMethod.PATCH }));
   }
 
-  public async post<T>(request: IApiRequest): Promise<IApiFetchResponse<T>> {
-    return this.fetch<T>(Object.assign(request, { method: ApiMethod.POST }));
+  public async post<T>(request: IApiRequest): Promise<T> {
+    return this.fetchJson<T>(Object.assign(request, { method: ApiMethod.POST }));
   }
 
-  public async delete<T>(request: IApiRequest): Promise<IApiFetchResponse<T>> {
-    return this.fetch<T>(Object.assign(request, { method: ApiMethod.DELETE }));
+  public async delete<T>(request: IApiRequest): Promise<T> {
+    return this.fetchJson<T>(Object.assign(request, { method: ApiMethod.DELETE }));
   }
 
   public async fetch<T>(request: IApiRequest): Promise<IApiFetchResponse<T>> {
     return fetch(this.buildUrl(request.url), this.buildOptions(request.options));
   }
 
-  public async fetchThrow<T>(request: IApiRequest): Promise<IApiFetchResponse<T>> {
+  public async fetchJson<T>(request: IApiRequest): Promise<T> {
     const resp = await this.fetch<T>(request);
 
     if (resp.status >= 400) {
