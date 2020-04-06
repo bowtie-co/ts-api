@@ -1,6 +1,6 @@
 {
   "name": "@bowtie/ts-api",
-  "version": "0.3.4",
+  "version": "1.0.0",
   "description": "ts-api",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
