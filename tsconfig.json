@@ -12,6 +12,7 @@
       "ES2020"
     ],
     "types": [
+      "@types/jest",
       "@types/node-fetch"
     ],
     "outDir": "dist",

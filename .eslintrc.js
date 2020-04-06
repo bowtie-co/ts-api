@@ -10,9 +10,9 @@ module.exports =  {
     sourceType:  'module',  // Allows for the use of imports
   },
   rules:  {
-    '@typescript-eslint/camelcase': 'off',
-    '@typescript-eslint/no-var-requires': 'off',
-    '@typescript-eslint/interface-name-prefix': 'off'
+    // '@typescript-eslint/camelcase': 'off',
+    // '@typescript-eslint/no-var-requires': 'off',
+    // '@typescript-eslint/interface-name-prefix': 'off'
     // Place to specify ESLint rules. Can be used to overwrite rules specified from the extended configs
     // e.g. "@typescript-eslint/explicit-function-return-type": "off",
   },
