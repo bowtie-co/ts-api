@@ -1,6 +1,6 @@
 {
   "name": "@bowtie/ts-api",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "ts-api",
   "main": "lib/dist/index.js",
   "types": "lib/dist/index.d.ts",
@@ -26,7 +26,7 @@
     "doc": "typedoc --theme ./node_modules/typedoc-neo-theme/bin/default --plugin typedoc-neo-theme src",
     "doc:commit": "npm run doc && git add docs && (git commit -m 'Generated Docs' || echo 'Docs unchanged')",
     "preversion": "npm run ci && npm run doc:commit && npm run pack",
-    "postversion": "npm publish && git push --follow-tags"
+    "postversion": "npm publish && git push --no-verify --follow-tags"
   },
   "repository": {
     "type": "git",
