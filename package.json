@@ -1,7 +1,7 @@
 {
-  "name": "@bowtie/sls-sdk",
+  "name": "@bowtie/ts-api",
   "version": "0.0.1",
-  "description": "sls-sdk",
+  "description": "ts-api",
   "main": "index.js",
   "engines": {
     "node": ">= 10.3.0"
@@ -28,7 +28,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bowtie-co/sls-sdk.git"
+    "url": "git+https://github.com/bowtie-co/ts-api.git"
   },
   "author": {
     "name": "Bowtie",
@@ -37,9 +37,9 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/bowtie-co/sls-sdk/issues"
+    "url": "https://github.com/bowtie-co/ts-api/issues"
   },
-  "homepage": "https://github.com/bowtie-co/sls-sdk#readme",
+  "homepage": "https://github.com/bowtie-co/ts-api#readme",
   "dependencies": {
     "@bowtie/api": "^0.6.3",
     "@types/node": "^13.11.0",
