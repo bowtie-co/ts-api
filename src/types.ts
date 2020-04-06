@@ -10,56 +10,56 @@ export enum ApiMethod {
   DELETE = 'DELETE'
 }
 
-export interface ApiHeaders {
+export interface IApiErrorResponse {
+  message?: string;
+}
+
+export interface IApiError {
+  message: string;
+  response: IApiFetchResponse<IApiPayload>;
+}
+
+export interface IApiHeaders {
   [header: string]: string;
 }
 
-export interface ApiParameters {
+export interface IApiParameters {
   [key: string]: string | number | object;
 }
 
-export interface ApiPayload {
+export interface IApiPayload {
   [key: string]: string | number | object;
 }
 
-export interface ApiOptions extends RequestInit {
+export interface IApiOptions extends RequestInit {
   method?: ApiMethod;
-  headers?: ApiHeaders;
+  headers?: IApiHeaders;
 }
 
-export interface ApiRequest<T> {
+export interface IApiRequest extends IApiOptions {
   url: string;
-  body?: ApiPayload | ApiPayload[];
-  params?: ApiParameters;
-  options?: ApiOptions;
+  params?: IApiParameters;
+  options?: IApiOptions;
 }
 
-export interface ApiFetchResponse<T = ApiPayload> extends Response {
+export interface IApiFetchResponse<T = IApiPayload> extends Response {
   json<P = T>(): Promise<P>;
 }
 
-// export interface ApiJsonResponse<T> {
-//   req: ApiRequest<T>;
-//   resp: ApiFetchResponse;
-//   code: number;
-//   data?: ApiPayload | ApiPayload[];
-//   status: string;
-// }
-
-export interface ApiEvents extends DefaultEventMap {
-  ok: (resp: ApiFetchResponse<ApiPayload>) => void;
-  bad: (resp: ApiFetchResponse<ApiPayload>) => void;
-  fail: (resp: ApiFetchResponse<ApiPayload>) => void;
-  unauthorized: (resp: ApiFetchResponse<ApiPayload>) => void;
+export interface IApiEvents extends DefaultEventMap {
+  ok: (resp: IApiFetchResponse<IApiPayload>) => void;
+  bad: (resp: IApiFetchResponse<IApiPayload>) => void;
+  fail: (resp: IApiFetchResponse<IApiPayload>) => void;
+  unauthorized: (resp: IApiFetchResponse<IApiPayload>) => void;
 }
 
-export interface QSConfig {
+export interface IQSConfig {
   parse?: IParseOptions;
   stringify?: IStringifyOptions;
 }
 
-export interface ApiConfig {
-  qs?: QSConfig;
+export interface IApiConfig {
+  qs?: IQSConfig;
   base?: string;
   stage?: string;
   prefix?: string;
@@ -67,22 +67,22 @@ export interface ApiConfig {
   verbose?: boolean;
   secureOnly?: boolean;
   authorization?: string;
-  defaultOptions?: ApiOptions;
+  defaultOptions?: IApiOptions;
 }
 
-export interface ApiClient {
-  config: ApiConfig;
-  events: EventEmitter<ApiEvents>;
+export interface IApiClient {
+  config: IApiConfig;
+  events: EventEmitter<IApiEvents>;
 
-  init(cfg?: ApiConfig): void;
-  buildUrl(route: string, params?: ApiParameters): string;
-  buildOptions(options?: ApiOptions): ApiOptions;
-  fetch<T>(request: ApiRequest<T>): Promise<ApiFetchResponse<T>>;
-  // json<T>(request: ApiRequest<T>): Promise<ApiFetchResponse<T>>;
+  init(cfg?: IApiConfig): void;
+  buildUrl(route: string, params?: IApiParameters): string;
+  buildOptions(options?: IApiOptions): IApiOptions;
 
-  get<T>(request: ApiRequest<T>): Promise<ApiFetchResponse<T>>;
-  put<T>(request: ApiRequest<T>): Promise<ApiFetchResponse<T>>;
-  patch<T>(request: ApiRequest<T>): Promise<ApiFetchResponse<T>>;
-  post<T>(request: ApiRequest<T>): Promise<ApiFetchResponse<T>>;
-  delete<T>(request: ApiRequest<T>): Promise<ApiFetchResponse<T>>;
+  fetch<T>(request: IApiRequest): Promise<IApiFetchResponse<T>>;
+
+  get<T>(request: IApiRequest): Promise<IApiFetchResponse<T>>;
+  put<T>(request: IApiRequest): Promise<IApiFetchResponse<T>>;
+  patch<T>(request: IApiRequest): Promise<IApiFetchResponse<T>>;
+  post<T>(request: IApiRequest): Promise<IApiFetchResponse<T>>;
+  delete<T>(request: IApiRequest): Promise<IApiFetchResponse<T>>;
 }

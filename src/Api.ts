@@ -2,79 +2,87 @@ import * as qs from 'qs';
 import fetch from 'node-fetch';
 import { EventEmitter } from 'tsee';
 
+import { ApiError } from './Error';
+
 import {
   ApiMethod,
   // ApiHeaders,
-  ApiOptions,
-  ApiEvents,
-  ApiFetchResponse,
-  ApiConfig,
-  ApiClient,
-  ApiRequest,
-  ApiParameters
+  IApiOptions,
+  IApiEvents,
+  IApiFetchResponse,
+  IApiConfig,
+  IApiClient,
+  IApiRequest,
+  IApiParameters
 } from './types';
 
-export const DefaultApiOptions: ApiOptions = {
+export const DefaultApiOptions: IApiOptions = {
   method: ApiMethod.GET,
   headers: {
     'Content-Type': 'application/json'
   }
 };
 
-export const DefaultApiConfig: ApiConfig = {
+export const DefaultApiConfig: IApiConfig = {
   base: '',
   defaultOptions: DefaultApiOptions
 };
 
-export class Api implements ApiClient {
-  public config: ApiConfig = DefaultApiConfig;
+export class Api implements IApiClient {
+  public config: IApiConfig = DefaultApiConfig;
   public events: EventEmitter;
 
-  constructor(config?: ApiConfig) {
+  constructor(config?: IApiConfig) {
     this.init(config);
   }
 
-  public init(config?: ApiConfig): void {
-    this.events = new EventEmitter<ApiEvents>();
+  public init(config?: IApiConfig): void {
+    this.events = new EventEmitter<IApiEvents>();
 
     if (config) {
       this.config = config;
     }
   }
 
-  public async get<T>(request: ApiRequest<T>): Promise<ApiFetchResponse<T>> {
-    return this.fetch(Object.assign(request, { method: ApiMethod.GET }));
+  public async get<T>(request: IApiRequest): Promise<IApiFetchResponse<T>> {
+    return this.fetchThrow<T>(Object.assign(request, { method: ApiMethod.GET }));
   }
 
-  public async put<T>(request: ApiRequest<T>): Promise<ApiFetchResponse<T>> {
-    return this.fetch(Object.assign(request, { method: ApiMethod.PUT }));
+  public async put<T>(request: IApiRequest): Promise<IApiFetchResponse<T>> {
+    return this.fetch<T>(Object.assign(request, { method: ApiMethod.PUT }));
   }
 
-  public async patch<T>(request: ApiRequest<T>): Promise<ApiFetchResponse<T>> {
-    return this.fetch(Object.assign(request, { method: ApiMethod.PATCH }));
+  public async patch<T>(request: IApiRequest): Promise<IApiFetchResponse<T>> {
+    return this.fetch<T>(Object.assign(request, { method: ApiMethod.PATCH }));
   }
 
-  public async post<T>(request: ApiRequest<T>): Promise<ApiFetchResponse<T>> {
-    return this.fetch(Object.assign(request, { method: ApiMethod.POST }));
+  public async post<T>(request: IApiRequest): Promise<IApiFetchResponse<T>> {
+    return this.fetch<T>(Object.assign(request, { method: ApiMethod.POST }));
   }
 
-  public async delete<T>(request: ApiRequest<T>): Promise<ApiFetchResponse<T>> {
-    return this.fetch(Object.assign(request, { method: ApiMethod.DELETE }));
+  public async delete<T>(request: IApiRequest): Promise<IApiFetchResponse<T>> {
+    return this.fetch<T>(Object.assign(request, { method: ApiMethod.DELETE }));
   }
 
-  public async fetch<T>(request: ApiRequest<T>): Promise<ApiFetchResponse<T>> {
+  public async fetch<T>(request: IApiRequest): Promise<IApiFetchResponse<T>> {
     return fetch(this.buildUrl(request.url), this.buildOptions(request.options));
   }
 
-  // public async json<T>(request: ApiRequest<T>): Promise<ApiFetchResponse<T>> {
-  //   return this.fetch(request).then((resp) => resp.json());
-  // }
+  public async fetchThrow<T>(request: IApiRequest): Promise<IApiFetchResponse<T>> {
+    const resp = await this.fetch<T>(request);
 
-  public buildUrl(route: string, params?: ApiParameters): string {
+    if (resp.status >= 400) {
+      throw new ApiError(resp);
+    }
+
+    return resp.json();
+  }
+
+  public buildUrl(route: string, params?: IApiParameters): string {
     return this.config.base + route + (qs ? qs.stringify(params) : '');
   }
 
-  public buildOptions(options?: ApiOptions): ApiOptions {
+  public buildOptions(options?: IApiOptions): IApiOptions {
     return Object.assign({}, this.config.defaultOptions, options);
   }
 

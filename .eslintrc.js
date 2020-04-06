@@ -1,3 +1,6 @@
 module.exports =  {
-  extends:  [ 'bowtie' ]
+  extends:  [ 'bowtie' ],
+  rules: {
+    '@typescript-eslint/interface-name-prefix': 'off'
+  }
 };
