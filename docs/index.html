@@ -1,0 +1,1135 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>tsargs</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.js" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<ul class="results-priority" style="display:none">
+					</ul>
+					<a href="index.html" class="title">tsargs</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+			</ul>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-3 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="globals.html" style="display:none"><em>Globals</em></a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+		<div class="col-7 offset-3 col-content">
+			<h1>tsargs</h1>
+			<div class="tsd-panel tsd-typography">
+				<p><a href="https://www.npmjs.com/package/tsargs"><img src="https://badge.fury.io/js/tsargs.svg?style=flat" alt="NPM Version"></a></p>
+				<a href="#tsargs" id="tsargs" style="color: inherit; text-decoration: none;">
+					<h1>tsargs</h1>
+				</a>
+				<p>TypeScript utility types for function arguments</p>
+				<ul>
+					<li><a href="#pick-argument">Pick type of argument</a></li>
+					<li><a href="#class-constructor">Pick args of class constructor</a></li>
+					<li><a href="#get-arguments-number">Get arguments number</a></li>
+					<li><a href="#replace-return-type-of-function">Replace return type of function</a></li>
+					<li><a href="#pick-range-of-arguments">Pick specific range of arguments</a></li>
+					<li><a href="#prepend-arguments">Prepend arguments</a></li>
+					<li><a href="#append-arguments">Append arguments</a></li>
+				</ul>
+				<p>Checkout <a href="https://github.com/Morglod/tsee">typed event emitter</a> for real-world example.</p>
+				<p><a href="/lib/test.ts">Tested with static asserts</a></p>
+				<p>⚠️ Should use latest typescript version. ⚠️</p>
+				<p>For typescript <code>2.8.x</code> switch to <code>ts280</code> branch.</p>
+				<details>
+					<summary>
+						How to use ts280 branch
+					</summary>
+				<pre><code>npm install git:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/morglod/</span>tsargs.git<span class="hljs-comment">#ts280</span></code></pre></details>
+				<a href="#install-amp-use" id="install-amp-use" style="color: inherit; text-decoration: none;">
+					<h2>Install &amp; use</h2>
+				</a>
+				<pre><code><span class="hljs-built_in">npm</span> i tsargs</code></pre><pre><code class="language-ts"><span class="hljs-keyword">import</span> { ArgI, Arg2, Args } <span class="hljs-keyword">from</span> <span class="hljs-string">'tsargs'</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params">a: <span class="hljs-built_in">number</span>, b: <span class="hljs-built_in">string</span></span>) </span>{}
+
+<span class="hljs-comment">// Pick all args</span>
+<span class="hljs-keyword">const</span> args: Args&lt;<span class="hljs-keyword">typeof</span> foo&gt; = [ <span class="hljs-number">123</span>, <span class="hljs-string">'hello'</span> ];
+
+<span class="hljs-comment">// Pick by index</span>
+<span class="hljs-keyword">const</span> firstArg: ArgI&lt;<span class="hljs-keyword">typeof</span> foo, <span class="hljs-number">0</span>&gt; = <span class="hljs-string">'hello world!'</span>;
+
+<span class="hljs-comment">// Pick by definition</span>
+<span class="hljs-keyword">const</span> secondArg: Arg2&lt;<span class="hljs-keyword">typeof</span> foo&gt; = <span class="hljs-string">'hello world!'</span>;</code></pre>
+				<a href="#pick-argument" id="pick-argument" style="color: inherit; text-decoration: none;">
+					<h2>Pick argument</h2>
+				</a>
+				<p>Use <code>ArgI&lt;Function, Index&gt;</code> to pick argument by it&#39;s index.</p>
+				<pre><code class="language-ts"><span class="hljs-keyword">import</span> { ArgI } <span class="hljs-keyword">from</span> <span class="hljs-string">'tsargs'</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params">a: <span class="hljs-built_in">number</span>, b: <span class="hljs-built_in">string</span></span>) </span>{}
+
+<span class="hljs-keyword">const</span> secondArg: ArgI&lt;<span class="hljs-keyword">typeof</span> foo, <span class="hljs-number">1</span>&gt; = <span class="hljs-string">'hello world!'</span>;</code></pre>
+				<details>
+					<summary>
+						ArgN variant
+					</summary>
+					<p>Use Arg<code>N</code> type to pick <code>N</code> argument (max 10 arg)  </p>
+					<pre><code class="language-ts"><span class="hljs-keyword">import</span> { Arg2 } <span class="hljs-keyword">from</span> <span class="hljs-string">'tsargs'</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params">a: <span class="hljs-built_in">number</span>, b: <span class="hljs-built_in">string</span></span>) </span>{}
+
+<span class="hljs-keyword">const</span> secondArg: Arg2&lt;<span class="hljs-keyword">typeof</span> foo&gt; = <span class="hljs-string">'hello world!'</span>;</code></pre>
+				</details>
+				<a href="#class-constructor" id="class-constructor" style="color: inherit; text-decoration: none;">
+					<h2>Class constructor</h2>
+				</a>
+				<p>Use <code>CtorArgs</code> to pick all args from constructor.</p>
+				<pre><code class="language-ts"><span class="hljs-keyword">import</span> { CtorArgs } <span class="hljs-keyword">from</span> <span class="hljs-string">'tsargs'</span>;
+
+<span class="hljs-keyword">class</span> A {
+    <span class="hljs-keyword">constructor</span>(<span class="hljs-params">
+        <span class="hljs-keyword">public</span> x: <span class="hljs-built_in">number</span>,
+        <span class="hljs-keyword">public</span> y: <span class="hljs-built_in">string</span>,
+        <span class="hljs-keyword">public</span> z: <span class="hljs-built_in">boolean</span>,
+    </span>) {}
+}
+
+<span class="hljs-keyword">const</span> args: CtorArgs&lt;<span class="hljs-keyword">typeof</span> A&gt; = [ <span class="hljs-number">123</span>, <span class="hljs-string">'hello'</span>, <span class="hljs-literal">false</span> ];</code></pre>
+				<a href="#get-arguments-number" id="get-arguments-number" style="color: inherit; text-decoration: none;">
+					<h2>Get arguments number</h2>
+				</a>
+				<pre><code class="language-ts"><span class="hljs-keyword">import</span> { ArgsNum } <span class="hljs-keyword">from</span> <span class="hljs-string">'tsargs'</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params">a: <span class="hljs-built_in">number</span>, b: <span class="hljs-built_in">string</span></span>): <span class="hljs-title">number</span> </span>{ <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>; }
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">boo</span>(<span class="hljs-params">a: <span class="hljs-built_in">number</span>, b: <span class="hljs-built_in">string</span>, c: <span class="hljs-built_in">boolean</span></span>): <span class="hljs-title">string</span> </span>{ <span class="hljs-keyword">return</span> <span class="hljs-string">'0'</span>; }
+
+<span class="hljs-keyword">const</span> fooI: ArgsNum&lt;<span class="hljs-keyword">typeof</span> foo&gt; = <span class="hljs-number">2</span>;
+<span class="hljs-keyword">const</span> booI: ArgsNum&lt;<span class="hljs-keyword">typeof</span> boo&gt; = <span class="hljs-number">3</span>;</code></pre>
+				<a href="#replace-return-type-of-function" id="replace-return-type-of-function" style="color: inherit; text-decoration: none;">
+					<h2>Replace return type of function</h2>
+				</a>
+				<pre><code class="language-ts"><span class="hljs-keyword">import</span> { ReplaceReturn } <span class="hljs-keyword">from</span> <span class="hljs-string">'tsargs'</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params">a: <span class="hljs-built_in">number</span>, b: <span class="hljs-built_in">string</span></span>): <span class="hljs-title">number</span> </span>{}
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">boo</span>(<span class="hljs-params">a: <span class="hljs-built_in">number</span>, b: <span class="hljs-built_in">string</span></span>): <span class="hljs-title">string</span> </span>{}
+
+<span class="hljs-keyword">const</span> booFromFoo: ReplaceReturn&lt;<span class="hljs-built_in">string</span>, <span class="hljs-keyword">typeof</span> foo&gt; = boo;</code></pre>
+				<a href="#prepend-arguments" id="prepend-arguments" style="color: inherit; text-decoration: none;">
+					<h2>Prepend arguments</h2>
+				</a>
+				<p>Useful for typed callbacks, rpc or event </p>
+				<p>Use Pre<code>N</code>Arg<code>J</code> type to prepend <code>N</code> arguments to function with <code>J</code> arguments (max 10 arg)<br>or Pre<code>N</code>ArgN type to prepend <code>N</code> arguments to function with unknown arguments number</p>
+				<pre><code class="language-ts"><span class="hljs-keyword">import</span> { Pre1Arg2, Pre1ArgN } <span class="hljs-keyword">from</span> <span class="hljs-string">'tsargs'</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params">a: <span class="hljs-built_in">number</span>, b: <span class="hljs-built_in">string</span></span>) </span>{}
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">boo</span>(<span class="hljs-params">x: <span class="hljs-built_in">string</span>, a: <span class="hljs-built_in">number</span>, b: <span class="hljs-built_in">string</span></span>) </span>{}
+
+<span class="hljs-keyword">const</span> booFromFoo: Pre1Arg2&lt;<span class="hljs-built_in">string</span>, <span class="hljs-keyword">typeof</span> foo&gt; = boo;
+<span class="hljs-keyword">const</span> booFromFoo2: Pre1ArgN&lt;<span class="hljs-built_in">string</span>, <span class="hljs-keyword">typeof</span> foo&gt; = boo;</code></pre>
+				<p>Pre<code>N</code>ArgN type may cause low ts performance</p>
+				<a href="#append-arguments" id="append-arguments" style="color: inherit; text-decoration: none;">
+					<h2>Append arguments</h2>
+				</a>
+				<p>Useful for typed callbacks, rpc or event </p>
+				<p>Use Post<code>N</code>Arg<code>J</code> type to append <code>N</code> arguments to function with <code>J</code> arguments (max 10 arg)<br>or Post<code>N</code>ArgN type to append <code>N</code> arguments to function with unknown arguments number</p>
+				<pre><code class="language-ts"><span class="hljs-keyword">import</span> { Post1Arg2, Post1ArgN } <span class="hljs-keyword">from</span> <span class="hljs-string">'tsargs'</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params">a: <span class="hljs-built_in">number</span>, b: <span class="hljs-built_in">string</span></span>) </span>{}
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">boo</span>(<span class="hljs-params">a: <span class="hljs-built_in">number</span>, b: <span class="hljs-built_in">string</span>, x: <span class="hljs-built_in">string</span></span>) </span>{}
+
+<span class="hljs-keyword">const</span> booFromFoo: Post1Arg2&lt;<span class="hljs-built_in">string</span>, <span class="hljs-keyword">typeof</span> foo&gt; = boo;
+<span class="hljs-keyword">const</span> booFromFoo2: Post1ArgN&lt;<span class="hljs-built_in">string</span>, <span class="hljs-keyword">typeof</span> foo&gt; = boo;</code></pre>
+				<p>Post<code>N</code>ArgN type may cause low ts performance</p>
+				<a href="#pick-range-of-arguments" id="pick-range-of-arguments" style="color: inherit; text-decoration: none;">
+					<h2>Pick range of arguments</h2>
+				</a>
+				<p>Callbacks &amp; arguments list</p>
+				<p>Use <code>Args10</code> to pick 10 args of function  </p>
+				<p>Use Args<code>N</code>off<code>Offset</code> to pick <code>N</code> args with <code>Offset</code> offset (max 10 arg)</p>
+				<pre><code class="language-ts"><span class="hljs-keyword">import</span> { Args2off1 } <span class="hljs-keyword">from</span> <span class="hljs-string">'tsargs'</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params">a: <span class="hljs-built_in">boolean</span>, b: <span class="hljs-built_in">number</span>, c: <span class="hljs-built_in">string</span></span>) </span>{}
+<span class="hljs-keyword">const</span> argsBC: Args2off1&lt;<span class="hljs-keyword">typeof</span> foo&gt; = [ <span class="hljs-number">123</span>, <span class="hljs-string">'Hello'</span> ];</code></pre>
+				<p>Use <code>Args</code> to pick all arguments</p>
+				<pre><code class="language-ts"><span class="hljs-keyword">import</span> { Args } <span class="hljs-keyword">from</span> <span class="hljs-string">'tsargs'</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params">a: <span class="hljs-built_in">boolean</span>, b: <span class="hljs-built_in">number</span>, c: <span class="hljs-built_in">string</span></span>) </span>{}
+<span class="hljs-keyword">const</span> argsABC: Args&lt;<span class="hljs-keyword">typeof</span> foo&gt; = [ <span class="hljs-literal">true</span>, <span class="hljs-number">123</span>, <span class="hljs-string">'Hello'</span> ];</code></pre>
+				<p><code>Args</code> could be used in rest arguments:</p>
+				<pre><code class="language-ts"><span class="hljs-keyword">const</span> myCallbacks = {
+    foo: <span class="hljs-function">(<span class="hljs-params">a: <span class="hljs-built_in">number</span>, b: <span class="hljs-built_in">number</span></span>) =&gt;</span> a + b,
+    boo: <span class="hljs-function">(<span class="hljs-params">a: <span class="hljs-built_in">number</span></span>) =&gt;</span> a + <span class="hljs-number">10</span>,
+};
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">call</span>&lt;
+    <span class="hljs-title">CallbackName</span> <span class="hljs-title">extends</span> <span class="hljs-title">keyof</span> <span class="hljs-title">Callbacks</span>,
+    <span class="hljs-title">Callbacks</span> <span class="hljs-title">extends</span> </span>{ [k: <span class="hljs-built_in">string</span>]: <span class="hljs-function">(<span class="hljs-params">...args: <span class="hljs-built_in">any</span>[]</span>) =&gt;</span> <span class="hljs-built_in">any</span> } = <span class="hljs-keyword">typeof</span> myCallbacks,
+    Callback <span class="hljs-keyword">extends</span> (...args: <span class="hljs-built_in">any</span>[]) =&gt; <span class="hljs-built_in">any</span> = Callbacks[CallbackName],
+&gt;(
+    callbackName: CallbackName,
+    ...args: Args&lt;Callback&gt; <span class="hljs-comment">// &lt;&lt;&lt;&lt;---------------</span>
+): ReturnType&lt;Callback&gt; {
+    <span class="hljs-keyword">return</span> (myCallbacks <span class="hljs-keyword">as</span> { [k: <span class="hljs-built_in">string</span>]: <span class="hljs-built_in">Function</span> })[callbackName <span class="hljs-keyword">as</span> <span class="hljs-built_in">any</span>](...args);
+}
+
+call(<span class="hljs-string">'foo'</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>); <span class="hljs-comment">// ok</span>
+call(<span class="hljs-string">'boo'</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>); <span class="hljs-comment">// Error: Should be 2 args, recieved 3</span></code></pre>
+				<p>Checkout <a href="https://github.com/Morglod/tsee">typed event emitter</a> for real-world example.</p>
+				<a href="#roadmap" id="roadmap" style="color: inherit; text-decoration: none;">
+					<h2>Roadmap</h2>
+				</a>
+				<ul>
+					<li>✔️ <a href="https://github.com/Morglod/tsee">Example of typed event emitter</a></li>
+					<li>✔️ Pick range of arguments to array type</li>
+					<li>✔️ Pick any number of arguments to array type</li>
+					<li>❌ Pick arguments to object (not needed, use tuples instead)</li>
+					<li>✔️ Replace return type</li>
+					<li>Specific argument&#39;s type replace</li>
+					<li>Remove arguments</li>
+				</ul>
+				<p><a href="https://github.com/Morglod/tsargs/issues">Write issue on github</a> if you have any trouble with arguments in typescript</p>
+				<a href="#contributors" id="contributors" style="color: inherit; text-decoration: none;">
+					<h2>Contributors</h2>
+				</a>
+				<p>Thanks <a href="https://github.com/CallumDenby">CallumDenby</a> for ArgI solution!</p>
+			</div>
+			<!--{&quot;options&quot;:&quot;/home/charlie/Developer/bowtie/agency/ts-api&quot;,&quot;tsconfig&quot;:&quot;/home/charlie/Developer/bowtie/agency/ts-api&quot;,&quot;inputFiles&quot;:[&quot;src&quot;],&quot;mode&quot;:0,&quot;includeDeclarations&quot;:false,&quot;entryPoint&quot;:&quot;&quot;,&quot;exclude&quot;:[],&quot;externalPattern&quot;:[],&quot;excludeExternals&quot;:false,&quot;excludeNotExported&quot;:false,&quot;excludeNotDocumented&quot;:false,&quot;excludePrivate&quot;:false,&quot;excludeProtected&quot;:false,&quot;ignoreCompilerErrors&quot;:false,&quot;disableSources&quot;:false,&quot;includes&quot;:&quot;&quot;,&quot;media&quot;:&quot;&quot;,&quot;out&quot;:&quot;docs&quot;,&quot;json&quot;:&quot;&quot;,&quot;theme&quot;:&quot;./node_modules/typedoc-neo-theme/bin/default&quot;,&quot;name&quot;:&quot;&quot;,&quot;includeVersion&quot;:false,&quot;excludeTags&quot;:[],&quot;readme&quot;:&quot;&quot;,&quot;defaultCategory&quot;:&quot;Other&quot;,&quot;categoryOrder&quot;:[],&quot;categorizeByGroup&quot;:true,&quot;gitRevision&quot;:&quot;&quot;,&quot;gitRemote&quot;:&quot;origin&quot;,&quot;gaID&quot;:&quot;&quot;,&quot;gaSite&quot;:&quot;auto&quot;,&quot;hideGenerator&quot;:false,&quot;toc&quot;:[],&quot;disableOutputCheck&quot;:false,&quot;help&quot;:false,&quot;version&quot;:false,&quot;plugin&quot;:[&quot;typedoc-neo-theme&quot;],&quot;logger&quot;:&quot;console&quot;,&quot;listInvalidSymbolLinks&quot;:false}-->
+		</div>
+		<div class="col-2 col-menu secondary-menu">
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-enum root">
+						<a href="enums/apimethod.html" class="tsd-kind-icon">Api<wbr>Method</a>
+					</li>
+					<li class=" tsd-kind-class root">
+						<a href="classes/api.html" class="tsd-kind-icon">Api</a>
+					</li>
+					<li class=" tsd-kind-interface root">
+						<a href="interfaces/apiclient.html" class="tsd-kind-icon">Api<wbr>Client</a>
+					</li>
+					<li class=" tsd-kind-interface root">
+						<a href="interfaces/apiconfig.html" class="tsd-kind-icon">Api<wbr>Config</a>
+					</li>
+					<li class=" tsd-kind-interface root">
+						<a href="interfaces/apievents.html" class="tsd-kind-icon">Api<wbr>Events</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter root">
+						<a href="interfaces/apifetchresponse.html" class="tsd-kind-icon">Api<wbr>Fetch<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface root">
+						<a href="interfaces/apiheaders.html" class="tsd-kind-icon">Api<wbr>Headers</a>
+					</li>
+					<li class=" tsd-kind-interface root">
+						<a href="interfaces/apioptions.html" class="tsd-kind-icon">Api<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface root">
+						<a href="interfaces/apiparameters.html" class="tsd-kind-icon">Api<wbr>Parameters</a>
+					</li>
+					<li class=" tsd-kind-interface root">
+						<a href="interfaces/apipayload.html" class="tsd-kind-icon">Api<wbr>Payload</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter root">
+						<a href="interfaces/apirequest.html" class="tsd-kind-icon">Api<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface root">
+						<a href="interfaces/qsconfig.html" class="tsd-kind-icon">QSConfig</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#arg1" class="tsd-kind-icon">Arg1</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#arg10" class="tsd-kind-icon">Arg10</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#arg2" class="tsd-kind-icon">Arg2</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#arg3" class="tsd-kind-icon">Arg3</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#arg4" class="tsd-kind-icon">Arg4</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#arg5" class="tsd-kind-icon">Arg5</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#arg6" class="tsd-kind-icon">Arg6</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#arg7" class="tsd-kind-icon">Arg7</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#arg8" class="tsd-kind-icon">Arg8</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#arg9" class="tsd-kind-icon">Arg9</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#argi" class="tsd-kind-icon">ArgI</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#args" class="tsd-kind-icon">Args</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#args10" class="tsd-kind-icon">Args10</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#args2off0" class="tsd-kind-icon">Args2off0</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#args2off1" class="tsd-kind-icon">Args2off1</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#args2off2" class="tsd-kind-icon">Args2off2</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#args2off3" class="tsd-kind-icon">Args2off3</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#args2off4" class="tsd-kind-icon">Args2off4</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#args2off5" class="tsd-kind-icon">Args2off5</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#args2off6" class="tsd-kind-icon">Args2off6</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#args2off7" class="tsd-kind-icon">Args2off7</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#args3off0" class="tsd-kind-icon">Args3off0</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#args3off1" class="tsd-kind-icon">Args3off1</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#args3off2" class="tsd-kind-icon">Args3off2</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#args3off3" class="tsd-kind-icon">Args3off3</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#args3off4" class="tsd-kind-icon">Args3off4</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#args3off5" class="tsd-kind-icon">Args3off5</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#args3off6" class="tsd-kind-icon">Args3off6</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#args4off0" class="tsd-kind-icon">Args4off0</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#args4off1" class="tsd-kind-icon">Args4off1</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#args4off2" class="tsd-kind-icon">Args4off2</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#args4off3" class="tsd-kind-icon">Args4off3</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#args4off4" class="tsd-kind-icon">Args4off4</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#args4off5" class="tsd-kind-icon">Args4off5</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#args5off0" class="tsd-kind-icon">Args5off0</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#args5off1" class="tsd-kind-icon">Args5off1</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#args5off2" class="tsd-kind-icon">Args5off2</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#args5off3" class="tsd-kind-icon">Args5off3</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#args5off4" class="tsd-kind-icon">Args5off4</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#args6off0" class="tsd-kind-icon">Args6off0</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#args6off1" class="tsd-kind-icon">Args6off1</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#args6off2" class="tsd-kind-icon">Args6off2</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#args6off3" class="tsd-kind-icon">Args6off3</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#args7off0" class="tsd-kind-icon">Args7off0</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#args7off1" class="tsd-kind-icon">Args7off1</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#args7off2" class="tsd-kind-icon">Args7off2</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#args8off0" class="tsd-kind-icon">Args8off0</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#args8off1" class="tsd-kind-icon">Args8off1</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#args9off0" class="tsd-kind-icon">Args9off0</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#argsn" class="tsd-kind-icon">ArgsN</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#argsn_old" class="tsd-kind-icon">Args<wbr>N_<wbr><wbr>Old</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#argsnum" class="tsd-kind-icon">Args<wbr>Num</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#ctorargs" class="tsd-kind-icon">Ctor<wbr>Args</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#ctorargsi" class="tsd-kind-icon">Ctor<wbr>ArgsI</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#ifextends" class="tsd-kind-icon">If<wbr>Extends</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post10arg1" class="tsd-kind-icon">Post10<wbr>Arg1</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post10arg10" class="tsd-kind-icon">Post10<wbr>Arg10</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post10arg2" class="tsd-kind-icon">Post10<wbr>Arg2</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post10arg3" class="tsd-kind-icon">Post10<wbr>Arg3</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post10arg4" class="tsd-kind-icon">Post10<wbr>Arg4</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post10arg5" class="tsd-kind-icon">Post10<wbr>Arg5</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post10arg6" class="tsd-kind-icon">Post10<wbr>Arg6</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post10arg7" class="tsd-kind-icon">Post10<wbr>Arg7</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post10arg8" class="tsd-kind-icon">Post10<wbr>Arg8</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post10arg9" class="tsd-kind-icon">Post10<wbr>Arg9</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post10argn" class="tsd-kind-icon">Post10<wbr>ArgN</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post1arg1" class="tsd-kind-icon">Post1<wbr>Arg1</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post1arg10" class="tsd-kind-icon">Post1<wbr>Arg10</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post1arg2" class="tsd-kind-icon">Post1<wbr>Arg2</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post1arg3" class="tsd-kind-icon">Post1<wbr>Arg3</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post1arg4" class="tsd-kind-icon">Post1<wbr>Arg4</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post1arg5" class="tsd-kind-icon">Post1<wbr>Arg5</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post1arg6" class="tsd-kind-icon">Post1<wbr>Arg6</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post1arg7" class="tsd-kind-icon">Post1<wbr>Arg7</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post1arg8" class="tsd-kind-icon">Post1<wbr>Arg8</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post1arg9" class="tsd-kind-icon">Post1<wbr>Arg9</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post1argn" class="tsd-kind-icon">Post1<wbr>ArgN</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post2arg1" class="tsd-kind-icon">Post2<wbr>Arg1</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post2arg10" class="tsd-kind-icon">Post2<wbr>Arg10</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post2arg2" class="tsd-kind-icon">Post2<wbr>Arg2</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post2arg3" class="tsd-kind-icon">Post2<wbr>Arg3</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post2arg4" class="tsd-kind-icon">Post2<wbr>Arg4</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post2arg5" class="tsd-kind-icon">Post2<wbr>Arg5</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post2arg6" class="tsd-kind-icon">Post2<wbr>Arg6</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post2arg7" class="tsd-kind-icon">Post2<wbr>Arg7</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post2arg8" class="tsd-kind-icon">Post2<wbr>Arg8</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post2arg9" class="tsd-kind-icon">Post2<wbr>Arg9</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post2argn" class="tsd-kind-icon">Post2<wbr>ArgN</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post3arg1" class="tsd-kind-icon">Post3<wbr>Arg1</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post3arg10" class="tsd-kind-icon">Post3<wbr>Arg10</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post3arg2" class="tsd-kind-icon">Post3<wbr>Arg2</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post3arg3" class="tsd-kind-icon">Post3<wbr>Arg3</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post3arg4" class="tsd-kind-icon">Post3<wbr>Arg4</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post3arg5" class="tsd-kind-icon">Post3<wbr>Arg5</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post3arg6" class="tsd-kind-icon">Post3<wbr>Arg6</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post3arg7" class="tsd-kind-icon">Post3<wbr>Arg7</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post3arg8" class="tsd-kind-icon">Post3<wbr>Arg8</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post3arg9" class="tsd-kind-icon">Post3<wbr>Arg9</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post3argn" class="tsd-kind-icon">Post3<wbr>ArgN</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post4arg1" class="tsd-kind-icon">Post4<wbr>Arg1</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post4arg10" class="tsd-kind-icon">Post4<wbr>Arg10</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post4arg2" class="tsd-kind-icon">Post4<wbr>Arg2</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post4arg3" class="tsd-kind-icon">Post4<wbr>Arg3</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post4arg4" class="tsd-kind-icon">Post4<wbr>Arg4</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post4arg5" class="tsd-kind-icon">Post4<wbr>Arg5</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post4arg6" class="tsd-kind-icon">Post4<wbr>Arg6</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post4arg7" class="tsd-kind-icon">Post4<wbr>Arg7</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post4arg8" class="tsd-kind-icon">Post4<wbr>Arg8</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post4arg9" class="tsd-kind-icon">Post4<wbr>Arg9</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post4argn" class="tsd-kind-icon">Post4<wbr>ArgN</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post5arg1" class="tsd-kind-icon">Post5<wbr>Arg1</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post5arg10" class="tsd-kind-icon">Post5<wbr>Arg10</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post5arg2" class="tsd-kind-icon">Post5<wbr>Arg2</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post5arg3" class="tsd-kind-icon">Post5<wbr>Arg3</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post5arg4" class="tsd-kind-icon">Post5<wbr>Arg4</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post5arg5" class="tsd-kind-icon">Post5<wbr>Arg5</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post5arg6" class="tsd-kind-icon">Post5<wbr>Arg6</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post5arg7" class="tsd-kind-icon">Post5<wbr>Arg7</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post5arg8" class="tsd-kind-icon">Post5<wbr>Arg8</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post5arg9" class="tsd-kind-icon">Post5<wbr>Arg9</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post5argn" class="tsd-kind-icon">Post5<wbr>ArgN</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post6arg1" class="tsd-kind-icon">Post6<wbr>Arg1</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post6arg10" class="tsd-kind-icon">Post6<wbr>Arg10</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post6arg2" class="tsd-kind-icon">Post6<wbr>Arg2</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post6arg3" class="tsd-kind-icon">Post6<wbr>Arg3</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post6arg4" class="tsd-kind-icon">Post6<wbr>Arg4</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post6arg5" class="tsd-kind-icon">Post6<wbr>Arg5</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post6arg6" class="tsd-kind-icon">Post6<wbr>Arg6</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post6arg7" class="tsd-kind-icon">Post6<wbr>Arg7</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post6arg8" class="tsd-kind-icon">Post6<wbr>Arg8</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post6arg9" class="tsd-kind-icon">Post6<wbr>Arg9</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post6argn" class="tsd-kind-icon">Post6<wbr>ArgN</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post7arg1" class="tsd-kind-icon">Post7<wbr>Arg1</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post7arg10" class="tsd-kind-icon">Post7<wbr>Arg10</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post7arg2" class="tsd-kind-icon">Post7<wbr>Arg2</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post7arg3" class="tsd-kind-icon">Post7<wbr>Arg3</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post7arg4" class="tsd-kind-icon">Post7<wbr>Arg4</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post7arg5" class="tsd-kind-icon">Post7<wbr>Arg5</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post7arg6" class="tsd-kind-icon">Post7<wbr>Arg6</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post7arg7" class="tsd-kind-icon">Post7<wbr>Arg7</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post7arg8" class="tsd-kind-icon">Post7<wbr>Arg8</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post7arg9" class="tsd-kind-icon">Post7<wbr>Arg9</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post7argn" class="tsd-kind-icon">Post7<wbr>ArgN</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post8arg1" class="tsd-kind-icon">Post8<wbr>Arg1</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post8arg10" class="tsd-kind-icon">Post8<wbr>Arg10</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post8arg2" class="tsd-kind-icon">Post8<wbr>Arg2</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post8arg3" class="tsd-kind-icon">Post8<wbr>Arg3</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post8arg4" class="tsd-kind-icon">Post8<wbr>Arg4</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post8arg5" class="tsd-kind-icon">Post8<wbr>Arg5</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post8arg6" class="tsd-kind-icon">Post8<wbr>Arg6</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post8arg7" class="tsd-kind-icon">Post8<wbr>Arg7</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post8arg8" class="tsd-kind-icon">Post8<wbr>Arg8</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post8arg9" class="tsd-kind-icon">Post8<wbr>Arg9</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post8argn" class="tsd-kind-icon">Post8<wbr>ArgN</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post9arg1" class="tsd-kind-icon">Post9<wbr>Arg1</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post9arg10" class="tsd-kind-icon">Post9<wbr>Arg10</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post9arg2" class="tsd-kind-icon">Post9<wbr>Arg2</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post9arg3" class="tsd-kind-icon">Post9<wbr>Arg3</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post9arg4" class="tsd-kind-icon">Post9<wbr>Arg4</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post9arg5" class="tsd-kind-icon">Post9<wbr>Arg5</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post9arg6" class="tsd-kind-icon">Post9<wbr>Arg6</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post9arg7" class="tsd-kind-icon">Post9<wbr>Arg7</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post9arg8" class="tsd-kind-icon">Post9<wbr>Arg8</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post9arg9" class="tsd-kind-icon">Post9<wbr>Arg9</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#post9argn" class="tsd-kind-icon">Post9<wbr>ArgN</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre10arg1" class="tsd-kind-icon">Pre10<wbr>Arg1</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre10arg10" class="tsd-kind-icon">Pre10<wbr>Arg10</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre10arg2" class="tsd-kind-icon">Pre10<wbr>Arg2</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre10arg3" class="tsd-kind-icon">Pre10<wbr>Arg3</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre10arg4" class="tsd-kind-icon">Pre10<wbr>Arg4</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre10arg5" class="tsd-kind-icon">Pre10<wbr>Arg5</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre10arg6" class="tsd-kind-icon">Pre10<wbr>Arg6</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre10arg7" class="tsd-kind-icon">Pre10<wbr>Arg7</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre10arg8" class="tsd-kind-icon">Pre10<wbr>Arg8</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre10arg9" class="tsd-kind-icon">Pre10<wbr>Arg9</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre10argn" class="tsd-kind-icon">Pre10<wbr>ArgN</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre1arg1" class="tsd-kind-icon">Pre1<wbr>Arg1</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre1arg10" class="tsd-kind-icon">Pre1<wbr>Arg10</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre1arg2" class="tsd-kind-icon">Pre1<wbr>Arg2</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre1arg3" class="tsd-kind-icon">Pre1<wbr>Arg3</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre1arg4" class="tsd-kind-icon">Pre1<wbr>Arg4</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre1arg5" class="tsd-kind-icon">Pre1<wbr>Arg5</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre1arg6" class="tsd-kind-icon">Pre1<wbr>Arg6</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre1arg7" class="tsd-kind-icon">Pre1<wbr>Arg7</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre1arg8" class="tsd-kind-icon">Pre1<wbr>Arg8</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre1arg9" class="tsd-kind-icon">Pre1<wbr>Arg9</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre1argn" class="tsd-kind-icon">Pre1<wbr>ArgN</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre2arg1" class="tsd-kind-icon">Pre2<wbr>Arg1</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre2arg10" class="tsd-kind-icon">Pre2<wbr>Arg10</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre2arg2" class="tsd-kind-icon">Pre2<wbr>Arg2</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre2arg3" class="tsd-kind-icon">Pre2<wbr>Arg3</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre2arg4" class="tsd-kind-icon">Pre2<wbr>Arg4</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre2arg5" class="tsd-kind-icon">Pre2<wbr>Arg5</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre2arg6" class="tsd-kind-icon">Pre2<wbr>Arg6</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre2arg7" class="tsd-kind-icon">Pre2<wbr>Arg7</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre2arg8" class="tsd-kind-icon">Pre2<wbr>Arg8</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre2arg9" class="tsd-kind-icon">Pre2<wbr>Arg9</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre2argn" class="tsd-kind-icon">Pre2<wbr>ArgN</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre3arg1" class="tsd-kind-icon">Pre3<wbr>Arg1</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre3arg10" class="tsd-kind-icon">Pre3<wbr>Arg10</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre3arg2" class="tsd-kind-icon">Pre3<wbr>Arg2</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre3arg3" class="tsd-kind-icon">Pre3<wbr>Arg3</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre3arg4" class="tsd-kind-icon">Pre3<wbr>Arg4</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre3arg5" class="tsd-kind-icon">Pre3<wbr>Arg5</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre3arg6" class="tsd-kind-icon">Pre3<wbr>Arg6</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre3arg7" class="tsd-kind-icon">Pre3<wbr>Arg7</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre3arg8" class="tsd-kind-icon">Pre3<wbr>Arg8</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre3arg9" class="tsd-kind-icon">Pre3<wbr>Arg9</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre3argn" class="tsd-kind-icon">Pre3<wbr>ArgN</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre4arg1" class="tsd-kind-icon">Pre4<wbr>Arg1</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre4arg10" class="tsd-kind-icon">Pre4<wbr>Arg10</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre4arg2" class="tsd-kind-icon">Pre4<wbr>Arg2</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre4arg3" class="tsd-kind-icon">Pre4<wbr>Arg3</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre4arg4" class="tsd-kind-icon">Pre4<wbr>Arg4</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre4arg5" class="tsd-kind-icon">Pre4<wbr>Arg5</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre4arg6" class="tsd-kind-icon">Pre4<wbr>Arg6</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre4arg7" class="tsd-kind-icon">Pre4<wbr>Arg7</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre4arg8" class="tsd-kind-icon">Pre4<wbr>Arg8</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre4arg9" class="tsd-kind-icon">Pre4<wbr>Arg9</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre4argn" class="tsd-kind-icon">Pre4<wbr>ArgN</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre5arg1" class="tsd-kind-icon">Pre5<wbr>Arg1</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre5arg10" class="tsd-kind-icon">Pre5<wbr>Arg10</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre5arg2" class="tsd-kind-icon">Pre5<wbr>Arg2</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre5arg3" class="tsd-kind-icon">Pre5<wbr>Arg3</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre5arg4" class="tsd-kind-icon">Pre5<wbr>Arg4</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre5arg5" class="tsd-kind-icon">Pre5<wbr>Arg5</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre5arg6" class="tsd-kind-icon">Pre5<wbr>Arg6</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre5arg7" class="tsd-kind-icon">Pre5<wbr>Arg7</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre5arg8" class="tsd-kind-icon">Pre5<wbr>Arg8</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre5arg9" class="tsd-kind-icon">Pre5<wbr>Arg9</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre5argn" class="tsd-kind-icon">Pre5<wbr>ArgN</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre6arg1" class="tsd-kind-icon">Pre6<wbr>Arg1</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre6arg10" class="tsd-kind-icon">Pre6<wbr>Arg10</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre6arg2" class="tsd-kind-icon">Pre6<wbr>Arg2</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre6arg3" class="tsd-kind-icon">Pre6<wbr>Arg3</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre6arg4" class="tsd-kind-icon">Pre6<wbr>Arg4</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre6arg5" class="tsd-kind-icon">Pre6<wbr>Arg5</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre6arg6" class="tsd-kind-icon">Pre6<wbr>Arg6</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre6arg7" class="tsd-kind-icon">Pre6<wbr>Arg7</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre6arg8" class="tsd-kind-icon">Pre6<wbr>Arg8</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre6arg9" class="tsd-kind-icon">Pre6<wbr>Arg9</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre6argn" class="tsd-kind-icon">Pre6<wbr>ArgN</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre7arg1" class="tsd-kind-icon">Pre7<wbr>Arg1</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre7arg10" class="tsd-kind-icon">Pre7<wbr>Arg10</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre7arg2" class="tsd-kind-icon">Pre7<wbr>Arg2</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre7arg3" class="tsd-kind-icon">Pre7<wbr>Arg3</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre7arg4" class="tsd-kind-icon">Pre7<wbr>Arg4</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre7arg5" class="tsd-kind-icon">Pre7<wbr>Arg5</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre7arg6" class="tsd-kind-icon">Pre7<wbr>Arg6</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre7arg7" class="tsd-kind-icon">Pre7<wbr>Arg7</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre7arg8" class="tsd-kind-icon">Pre7<wbr>Arg8</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre7arg9" class="tsd-kind-icon">Pre7<wbr>Arg9</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre7argn" class="tsd-kind-icon">Pre7<wbr>ArgN</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre8arg1" class="tsd-kind-icon">Pre8<wbr>Arg1</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre8arg10" class="tsd-kind-icon">Pre8<wbr>Arg10</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre8arg2" class="tsd-kind-icon">Pre8<wbr>Arg2</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre8arg3" class="tsd-kind-icon">Pre8<wbr>Arg3</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre8arg4" class="tsd-kind-icon">Pre8<wbr>Arg4</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre8arg5" class="tsd-kind-icon">Pre8<wbr>Arg5</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre8arg6" class="tsd-kind-icon">Pre8<wbr>Arg6</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre8arg7" class="tsd-kind-icon">Pre8<wbr>Arg7</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre8arg8" class="tsd-kind-icon">Pre8<wbr>Arg8</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre8arg9" class="tsd-kind-icon">Pre8<wbr>Arg9</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre8argn" class="tsd-kind-icon">Pre8<wbr>ArgN</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre9arg1" class="tsd-kind-icon">Pre9<wbr>Arg1</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre9arg10" class="tsd-kind-icon">Pre9<wbr>Arg10</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre9arg2" class="tsd-kind-icon">Pre9<wbr>Arg2</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre9arg3" class="tsd-kind-icon">Pre9<wbr>Arg3</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre9arg4" class="tsd-kind-icon">Pre9<wbr>Arg4</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre9arg5" class="tsd-kind-icon">Pre9<wbr>Arg5</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre9arg6" class="tsd-kind-icon">Pre9<wbr>Arg6</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre9arg7" class="tsd-kind-icon">Pre9<wbr>Arg7</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre9arg8" class="tsd-kind-icon">Pre9<wbr>Arg8</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre9arg9" class="tsd-kind-icon">Pre9<wbr>Arg9</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#pre9argn" class="tsd-kind-icon">Pre9<wbr>ArgN</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
+						<a href="globals.html#replacereturn" class="tsd-kind-icon">Replace<wbr>Return</a>
+					</li>
+					<li class=" tsd-kind-object-literal root">
+						<a href="globals.html#defaultapiconfig" class="tsd-kind-icon">Default<wbr>Api<wbr>Config</a>
+					</li>
+					<li class=" tsd-kind-object-literal root">
+						<a href="globals.html#defaultapioptions" class="tsd-kind-icon">Default<wbr>Api<wbr>Options</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>
