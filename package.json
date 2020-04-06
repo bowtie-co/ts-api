@@ -2,7 +2,8 @@
   "name": "@bowtie/ts-api",
   "version": "0.1.0",
   "description": "ts-api",
-  "main": "index.js",
+  "main": "lib/dist/index.js",
+  "types": "lib/dist/index.d.ts",
   "engines": {
     "node": ">= 10.3.0"
   },
