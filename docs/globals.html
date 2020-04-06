@@ -84,21 +84,24 @@
 							<h3>Classes</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-class"><a href="classes/api.html" class="tsd-kind-icon">Api</a></li>
+								<li class="tsd-kind-class"><a href="classes/apierror.html" class="tsd-kind-icon">ApiError</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Interfaces</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-interface"><a href="interfaces/apiclient.html" class="tsd-kind-icon">ApiClient</a></li>
-								<li class="tsd-kind-interface"><a href="interfaces/apiconfig.html" class="tsd-kind-icon">ApiConfig</a></li>
-								<li class="tsd-kind-interface"><a href="interfaces/apievents.html" class="tsd-kind-icon">ApiEvents</a></li>
-								<li class="tsd-kind-interface tsd-has-type-parameter"><a href="interfaces/apifetchresponse.html" class="tsd-kind-icon">ApiFetchResponse</a></li>
-								<li class="tsd-kind-interface"><a href="interfaces/apiheaders.html" class="tsd-kind-icon">ApiHeaders</a></li>
-								<li class="tsd-kind-interface"><a href="interfaces/apioptions.html" class="tsd-kind-icon">ApiOptions</a></li>
-								<li class="tsd-kind-interface"><a href="interfaces/apiparameters.html" class="tsd-kind-icon">ApiParameters</a></li>
-								<li class="tsd-kind-interface"><a href="interfaces/apipayload.html" class="tsd-kind-icon">ApiPayload</a></li>
-								<li class="tsd-kind-interface tsd-has-type-parameter"><a href="interfaces/apirequest.html" class="tsd-kind-icon">ApiRequest</a></li>
-								<li class="tsd-kind-interface"><a href="interfaces/qsconfig.html" class="tsd-kind-icon">QSConfig</a></li>
+								<li class="tsd-kind-interface"><a href="interfaces/iapiclient.html" class="tsd-kind-icon">IApiClient</a></li>
+								<li class="tsd-kind-interface"><a href="interfaces/iapiconfig.html" class="tsd-kind-icon">IApiConfig</a></li>
+								<li class="tsd-kind-interface"><a href="interfaces/iapierror.html" class="tsd-kind-icon">IApiError</a></li>
+								<li class="tsd-kind-interface"><a href="interfaces/iapierrorresponse.html" class="tsd-kind-icon">IApiErrorResponse</a></li>
+								<li class="tsd-kind-interface"><a href="interfaces/iapievents.html" class="tsd-kind-icon">IApiEvents</a></li>
+								<li class="tsd-kind-interface tsd-has-type-parameter"><a href="interfaces/iapifetchresponse.html" class="tsd-kind-icon">IApiFetchResponse</a></li>
+								<li class="tsd-kind-interface"><a href="interfaces/iapiheaders.html" class="tsd-kind-icon">IApiHeaders</a></li>
+								<li class="tsd-kind-interface"><a href="interfaces/iapioptions.html" class="tsd-kind-icon">IApiOptions</a></li>
+								<li class="tsd-kind-interface"><a href="interfaces/iapiparameters.html" class="tsd-kind-icon">IApiParameters</a></li>
+								<li class="tsd-kind-interface"><a href="interfaces/iapipayload.html" class="tsd-kind-icon">IApiPayload</a></li>
+								<li class="tsd-kind-interface"><a href="interfaces/iapirequest.html" class="tsd-kind-icon">IApiRequest</a></li>
+								<li class="tsd-kind-interface"><a href="interfaces/iqsconfig.html" class="tsd-kind-icon">IQSConfig</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section tsd-is-external">
@@ -18694,7 +18697,7 @@
 					<div class="tsd-signature tsd-kind-icon">Default<wbr>Api<wbr>Config<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in src/Api.ts:24</li>
+							<li>Defined in src/Api.ts:26</li>
 						</ul>
 					</aside>
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
@@ -18703,17 +18706,17 @@
 						<div class="tsd-signature tsd-kind-icon">base<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;&quot;</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in src/Api.ts:25</li>
+								<li>Defined in src/Api.ts:27</li>
 							</ul>
 						</aside>
 					</section>
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
 						<a name="defaultapiconfig.defaultoptions" class="tsd-anchor"></a>
 						<h3>default<wbr>Options</h3>
-						<div class="tsd-signature tsd-kind-icon">default<wbr>Options<span class="tsd-signature-symbol">:</span> <a href="interfaces/apioptions.html" class="tsd-signature-type">ApiOptions</a><span class="tsd-signature-symbol"> = DefaultApiOptions</span></div>
+						<div class="tsd-signature tsd-kind-icon">default<wbr>Options<span class="tsd-signature-symbol">:</span> <a href="interfaces/iapioptions.html" class="tsd-signature-type">IApiOptions</a><span class="tsd-signature-symbol"> = DefaultApiOptions</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in src/Api.ts:26</li>
+								<li>Defined in src/Api.ts:28</li>
 							</ul>
 						</aside>
 					</section>
@@ -18724,7 +18727,7 @@
 					<div class="tsd-signature tsd-kind-icon">Default<wbr>Api<wbr>Options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in src/Api.ts:17</li>
+							<li>Defined in src/Api.ts:19</li>
 						</ul>
 					</aside>
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
@@ -18733,7 +18736,7 @@
 						<div class="tsd-signature tsd-kind-icon">method<span class="tsd-signature-symbol">:</span> <a href="enums/apimethod.html#get" class="tsd-signature-type">GET</a><span class="tsd-signature-symbol"> = ApiMethod.GET</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in src/Api.ts:18</li>
+								<li>Defined in src/Api.ts:20</li>
 							</ul>
 						</aside>
 					</section>
@@ -18743,7 +18746,7 @@
 						<div class="tsd-signature tsd-kind-icon">headers<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in src/Api.ts:19</li>
+								<li>Defined in src/Api.ts:21</li>
 							</ul>
 						</aside>
 						<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
@@ -18752,7 +18755,7 @@
 							<div class="tsd-signature tsd-kind-icon">Content-<wbr><wbr>Type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;application/json&quot;</span></div>
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/Api.ts:20</li>
+									<li>Defined in src/Api.ts:22</li>
 								</ul>
 							</aside>
 						</section>
@@ -18770,35 +18773,44 @@
 					<li class=" tsd-kind-class root">
 						<a href="classes/api.html" class="tsd-kind-icon">Api</a>
 					</li>
-					<li class=" tsd-kind-interface root">
-						<a href="interfaces/apiclient.html" class="tsd-kind-icon">Api<wbr>Client</a>
+					<li class=" tsd-kind-class root">
+						<a href="classes/apierror.html" class="tsd-kind-icon">Api<wbr>Error</a>
 					</li>
 					<li class=" tsd-kind-interface root">
-						<a href="interfaces/apiconfig.html" class="tsd-kind-icon">Api<wbr>Config</a>
+						<a href="interfaces/iapiclient.html" class="tsd-kind-icon">IApi<wbr>Client</a>
 					</li>
 					<li class=" tsd-kind-interface root">
-						<a href="interfaces/apievents.html" class="tsd-kind-icon">Api<wbr>Events</a>
+						<a href="interfaces/iapiconfig.html" class="tsd-kind-icon">IApi<wbr>Config</a>
+					</li>
+					<li class=" tsd-kind-interface root">
+						<a href="interfaces/iapierror.html" class="tsd-kind-icon">IApi<wbr>Error</a>
+					</li>
+					<li class=" tsd-kind-interface root">
+						<a href="interfaces/iapierrorresponse.html" class="tsd-kind-icon">IApi<wbr>Error<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface root">
+						<a href="interfaces/iapievents.html" class="tsd-kind-icon">IApi<wbr>Events</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-has-type-parameter root">
-						<a href="interfaces/apifetchresponse.html" class="tsd-kind-icon">Api<wbr>Fetch<wbr>Response</a>
+						<a href="interfaces/iapifetchresponse.html" class="tsd-kind-icon">IApi<wbr>Fetch<wbr>Response</a>
 					</li>
 					<li class=" tsd-kind-interface root">
-						<a href="interfaces/apiheaders.html" class="tsd-kind-icon">Api<wbr>Headers</a>
+						<a href="interfaces/iapiheaders.html" class="tsd-kind-icon">IApi<wbr>Headers</a>
 					</li>
 					<li class=" tsd-kind-interface root">
-						<a href="interfaces/apioptions.html" class="tsd-kind-icon">Api<wbr>Options</a>
+						<a href="interfaces/iapioptions.html" class="tsd-kind-icon">IApi<wbr>Options</a>
 					</li>
 					<li class=" tsd-kind-interface root">
-						<a href="interfaces/apiparameters.html" class="tsd-kind-icon">Api<wbr>Parameters</a>
+						<a href="interfaces/iapiparameters.html" class="tsd-kind-icon">IApi<wbr>Parameters</a>
 					</li>
 					<li class=" tsd-kind-interface root">
-						<a href="interfaces/apipayload.html" class="tsd-kind-icon">Api<wbr>Payload</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-has-type-parameter root">
-						<a href="interfaces/apirequest.html" class="tsd-kind-icon">Api<wbr>Request</a>
+						<a href="interfaces/iapipayload.html" class="tsd-kind-icon">IApi<wbr>Payload</a>
 					</li>
 					<li class=" tsd-kind-interface root">
-						<a href="interfaces/qsconfig.html" class="tsd-kind-icon">QSConfig</a>
+						<a href="interfaces/iapirequest.html" class="tsd-kind-icon">IApi<wbr>Request</a>
+					</li>
+					<li class=" tsd-kind-interface root">
+						<a href="interfaces/iqsconfig.html" class="tsd-kind-icon">IQSConfig</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external root">
 						<a href="globals.html#arg1" class="tsd-kind-icon">Arg1</a>
