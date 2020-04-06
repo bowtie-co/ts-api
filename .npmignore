@@ -15,16 +15,9 @@
 
 Makefile
 
-# CDK asset staging directory
-.cdk.staging
-cdk.out
-config
-coverage
-docs
-scripts
-test
-tmp
-bin
-.git
-dist
 src
+bin
+tmp
+test
+coverage
+node_modules

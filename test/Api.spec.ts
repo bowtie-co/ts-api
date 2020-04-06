@@ -1,4 +1,4 @@
-import { Api } from '../src';
+import { Api } from '../dist';
 
 describe('Api', () => {
   it('exists', () => {
